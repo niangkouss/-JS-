@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+<div id="one"></div>
+<div id="two"></div>
+<div id="three"></div>
+<div id="four"></div>
+<div id="five"></div>
+<style>
+	div{
+		width: 100px;
+		height: 100px;
+		border-radius: 50%;
+		position: absolute;
+		left: 0;
+	}
+	#one {
+		top: 0;
+		background-color: chartreuse;
+	}
+
+	#two {
+		top: 100px;
+		background-color: brown;
+	}
+
+	#three {
+		top: 200px;
+		background-color: orange;
+	}
+
+	#four {
+		top: 300px;
+		background-color: palegreen;
+	}
+
+	#five {
+		top: 400px;
+		background-color: orchid;
+	}
+</style>
+
+<script src="drag_bounce.js"></script>
+<script>
+    //绑定:使用
+    var boxes = document.getElementsByTagName('div');
+    for(var i = 0;i<boxes.length;i++){
+        var box = boxes[i];
+        on(box,'mousedown',down);//这个是所有事件的入口,绑定原生函数执行DOWN
+        on(box,'selfdragstart',increaseIndex);//订阅
+        on(box,'selfdragstart',clearEffect);//订阅
+        on(box,'selfdragging',getSpeed);
+        on(box,'selfdragend',fly);
+        on(box,'selfdragend',drop);
+    }
+    //也就是触发e,都是靠原生事件去触发的,所以入口是mousedown,在绑定的down里面发布selfdragstart
+</script>
+</body>
+</html>
